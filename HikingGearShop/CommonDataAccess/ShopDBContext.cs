@@ -1,7 +1,9 @@
-﻿using HikingGearShop.Models;
+﻿using HikingGearShop.OrderService.Data;
+using HikingGearShop.ProductService.Data;
+using HikingGearShop.ShoppingCartService.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace HikingGearShop.Data
+namespace HikingGearShop.CommonDataAccess
 {
     public class ShopDBContext : DbContext
     {

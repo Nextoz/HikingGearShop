@@ -1,4 +1,4 @@
-using HikingGearShop.Data;
+using HikingGearShop.CommonDataAccess;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

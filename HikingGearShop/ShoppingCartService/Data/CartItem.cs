@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using HikingGearShop.ProductService.Data;
 
-namespace HikingGearShop.Models
+namespace HikingGearShop.ShoppingCartService.Data
 {
     public class CartItem
     {

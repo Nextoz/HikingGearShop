@@ -1,4 +1,6 @@
-﻿namespace HikingGearShop.Models
+﻿using HikingGearShop.ShoppingCartService.Data;
+
+namespace HikingGearShop.OrderService.Data
 {
     public class Order
     {
