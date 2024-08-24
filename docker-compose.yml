@@ -1,0 +1,29 @@
+version: '3.4'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    environment:
+      MSSQL_SA_PASSWORD: "EnJ9uRr#-W"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    networks:
+      - app-network
+
+    
+  hikinggearshop:
+    image: ${DOCKER_REGISTRY-}hikinggearshop
+    build:
+      context: .
+      dockerfile: HikingGearShop/Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - sqlserver
+    networks:
+      - app-network
+networks:
+  app-network:
+   
