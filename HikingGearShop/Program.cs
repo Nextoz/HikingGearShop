@@ -1,4 +1,5 @@
 using HikingGearShop.CommonDataAccess;
+using HikingGearShop.ProductService.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,8 @@ var connectionString = builder.Configuration.GetConnectionString("HikingGearShop
 
 builder.Services.AddDbContext<ShopDBContext>(options =>
     options.UseSqlServer(connectionString));
+
+builder.Services.AddScoped<IProductService, ProductService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
