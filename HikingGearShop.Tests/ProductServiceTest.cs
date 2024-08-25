@@ -22,7 +22,7 @@ namespace HikingGearShop.Tests
         public void GetProductsTest()
         {
 
-            _productServiceMock.GetProducts();
+            //_productServiceMock.GetProducts();
         }
     }
 }

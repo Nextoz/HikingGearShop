@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using HikingGearShop.ProductService.Data;
 using HikingGearShop.CommonDataAccess;
 using HikingGearShop.ProductService.Services;
+using Microsoft.Data.SqlClient;
 
 namespace HikingGearShop.ProductService.Controllers
 {
@@ -21,6 +22,24 @@ namespace HikingGearShop.ProductService.Controllers
         public ProductsController(IProductService productService)
         {
             _productService = productService;
+        }
+
+
+        [HttpGet("test-connection")]
+        public IActionResult TestConnection()
+        {
+            try
+            {
+                using (var connection = new SqlConnection("Server=172.19.0.2;Database=HikingGearShopDb;User Id=sa;Password=EnJ9uRr#-W;TrustServerCertificate=True;"))
+                {
+                    connection.Open();
+                    return Ok("Database connection successful!");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Database connection failed: {ex.Message}");
+            }
         }
 
         // GET: api/Products
