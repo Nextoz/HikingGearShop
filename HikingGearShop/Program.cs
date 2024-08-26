@@ -1,4 +1,8 @@
+using Hangfire;
 using HikingGearShop.CommonDataAccess;
+using HikingGearShop.EmailService;
+using HikingGearShop.OrderService.Data;
+using HikingGearShop.ProductService.Data;
 using HikingGearShop.ProductService.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,10 +16,23 @@ builder.Services.AddDbContext<ShopDBContext>(options =>
     options.UseSqlServer(connectionString));
 
 builder.Services.AddScoped<IProductService, ProductService>();
+//builder.Services.AddScoped
+// 
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Configure Hangfire services
+builder.Services.AddHangfire(config =>
+{
+    config.UseSqlServerStorage(connectionString);
+});
+builder.Services.AddHangfireServer();
 
 var app = builder.Build();
 

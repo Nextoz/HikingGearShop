@@ -1,7 +1,12 @@
-﻿namespace HikingGearShop.EmailService
+﻿using HikingGearShop.OrderService.Data;
+using System.Net.Mail;
+
+namespace HikingGearShop.EmailService
 {
     public interface IEmailService
     {
-        public Task SendMonthyOrdersEmail();
+        void SendMonthyOrdersEmail();
+        MailMessage GenerateEmailContent(List<Order> orders, string costumerEmail);
+
     }
 }
