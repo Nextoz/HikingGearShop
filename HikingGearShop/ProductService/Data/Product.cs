@@ -1,4 +1,4 @@
-﻿namespace HikingGearShop.Models
+﻿namespace HikingGearShop.ProductService.Data
 {
     public class Product
     {
