@@ -12,7 +12,7 @@ namespace HikingGearShop.EmailService
     public class EmailService : IEmailService
     {
         private readonly IOrderRepository _orderRepository;
-        //Email sender
+       
         public EmailService(IOrderRepository orderRepository)
         {
             _orderRepository = orderRepository;
@@ -29,7 +29,7 @@ namespace HikingGearShop.EmailService
 
                 SendEmail(mailContent);
             }
-        }DataReaderDisposingEventData Email
+        }
 
         public MailMessage GenerateEmailContent(List<Order> orders, string costumerEmail)
         {
@@ -37,6 +37,7 @@ namespace HikingGearShop.EmailService
             MemoryStream ms = new MemoryStream();
             PdfWriter writer = PdfWriter.GetInstance(document, ms);
 
+            document.Open();
             document.Add(new Paragraph("Monthly Order Summary"));
             document.Add(new Paragraph($"Customer: {costumerEmail}"));
             document.Add(new Paragraph($"Date: {DateTime.Now.ToShortDateString()}"));
@@ -54,7 +55,7 @@ namespace HikingGearShop.EmailService
                     document.Add(new Paragraph($"- {item.Quantity}x {item.Product.Name} at {item.Price:C} each"));
                 }
 
-                document.Add(new Paragraph("\n")); // Blank line between orders
+                document.Add(new Paragraph("\n")); 
             }
 
             writer.CloseStream = false;
@@ -74,7 +75,7 @@ namespace HikingGearShop.EmailService
 
         }
 
-        private void SendEmail(MailMessage mailMessage)
+        private static void SendEmail(MailMessage mailMessage)
         {
             SmtpClient smtpClient = new SmtpClient()
             {

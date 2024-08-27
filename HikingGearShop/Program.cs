@@ -17,11 +17,12 @@ builder.Services.AddDbContext<ShopDBContext>(options =>
 
 builder.Services.AddScoped<IProductService, ProductService>();
 //builder.Services.AddScoped
-// 
+// Skal kunne add til cart
+
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
-builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddSingleton<IEmailService, EmailService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -34,6 +35,7 @@ builder.Services.AddHangfire(config =>
 });
 builder.Services.AddHangfireServer();
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -42,6 +44,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseHangfireDashboard("/hangfire");
+
+RecurringJob.AddOrUpdate<IEmailService>(x => x.SendMonthyOrdersEmail(), Cron.Monthly);
 
 app.UseHttpsRedirection();
 

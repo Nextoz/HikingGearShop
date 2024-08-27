@@ -7,6 +7,5 @@ namespace HikingGearShop.EmailService
     {
         void SendMonthyOrdersEmail();
         MailMessage GenerateEmailContent(List<Order> orders, string costumerEmail);
-
     }
 }
